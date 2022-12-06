@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Category
+from .models import Category, Product
 
 
 def error_404_view(request, exception):
@@ -10,5 +10,7 @@ def shopmainview(requet, category_slug=None):
     ctx = {'categories': categories}
     return render(requet, 'index.html', ctx)
 
-def shopview(request):
-    return render(request, 'shop.html')
+def product_list(request):
+    products = Product.objects.all()
+    ctx = {'products': products}
+    return render(request, 'shop.html', ctx)

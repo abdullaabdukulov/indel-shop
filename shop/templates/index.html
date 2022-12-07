@@ -9,7 +9,7 @@
 		  <div class="col-lg-8 text-center">
 			<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
 			<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-			<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="shop/">Shop Now</a>
+			<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="#shop">Shop Now</a>
 		  </div>
 		</div>
 	  </div>
@@ -31,7 +31,7 @@
 		  <div class="col-lg-8 text-right">
 			<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
 			<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-			<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="shop/">Shop Now</a>
+			<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="/shop/">Shop Now</a>
 		  </div>
 		</div>
 	  </div>
@@ -49,8 +49,8 @@
 			  {% for category in categories %}
 			  <div class="col-md-6">
 				  <div class="category-box">
-					  <a href="{{ category.slug }}">
-						  <img src="../media/{{ category.image }}" alt="{{ image }}" />
+					  <a href="category/{{ category.slug }}">
+						  <img src="{{ category.image.url }}" alt="{{ category.image }}" />
 						  <div class="content">
 							  <h3>{{ category.name }}</h3>
 							  <p>{{ category.description }}</p>
@@ -63,10 +63,10 @@
 	  </div>
   </section>
   
-  <section class="products section bg-gray">
+  <section class="products section bg-gray" id='shop'>
 	  <div class="container">
 		  <div class="row">
-			  <div class="title text-center">
+			  <div class="title text-center">	
 				  <h2>Trendy Products</h2>
 			  </div>
 		  </div>

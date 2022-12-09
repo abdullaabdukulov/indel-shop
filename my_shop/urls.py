@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
+    path('tinymce/',include('tinymce.urls')),
     
 ]
 handler404 = 'shop.views.error_404_view'

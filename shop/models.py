@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from colorfield.fields import ColorField
+
 
     
 class Category(models.Model):
@@ -32,6 +34,7 @@ class Product(models.Model):
     product_front_image = models.ImageField(upload_to='products/%Y/%m/%d')
     description = models.TextField(max_length=400)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    statement = models.TextField()
     available = models.BooleanField(default=True)    
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -55,7 +58,7 @@ class Product(models.Model):
 class ProductsImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='images', verbose_name='product')
     image = models.ImageField(upload_to='products/%Y/%m/%d/product_images/', null=True, blank=True)
-
+    
     class Meta:
         verbose_name = 'product image'
         verbose_name_plural = 'product images'
@@ -71,5 +74,18 @@ class ProductSizes(models.Model):
         verbose_name = 'product size'
         verbose_name_plural = 'product sizes'
 
+    def __str__(self):
+        return self.product.name
+
+class ProductColor(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='color', blank=True, null=True)
+    color = models.CharField(max_length=10)
+    code = ColorField(default='#FF0000')
+    
+
+    class Meta:
+        verbose_name = 'product color'
+        verbose_name_plural = 'product colors'
+    
     def __str__(self):
         return self.product.name

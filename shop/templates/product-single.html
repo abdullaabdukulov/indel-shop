@@ -73,15 +73,17 @@
 					<div class="color-swatches">
 						<span>color:</span>
 						<ul>
+							{% for color in product.color.all  %}
 							<li>
-								<a href="#!" class="swatch-violet"></a>
+								<a href="#!" class="swatch" style="background-color: {{ color.code }}"></a>
 							</li>
-							<li>
+							{% endfor %}
+							{% comment %} <li>
 								<a href="#!" class="swatch-black"></a>
 							</li>
 							<li>
 								<a href="#!" class="swatch-cream"></a>
-							</li>
+							</li> {% endcomment %}
 						</ul>
 					</div>
 					<div class="product-size">

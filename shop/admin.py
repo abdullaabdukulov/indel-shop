@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Category, ProductsImage, ProductSizes, Product
+from .models import Category, ProductsImage, ProductSizes, Product, ProductColor
+from django.db import models
+from tinymce.widgets import TinyMCE
 
 
 class ProductSizeModelAdmin(admin.TabularInline):
@@ -15,6 +17,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
     
+class ProdcutColorModelAdmin(admin.TabularInline):
+    model = ProductColor
+    raw_id_fields = ['product']
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -22,8 +27,13 @@ class ProductAdmin(admin.ModelAdmin):
                        'available', 'created', 'updated']
     list_filter = ['available', 'created', 'updated']
     list_editable = ['price', 'available']
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()}
+   }
     prepopulated_fields = {'slug': ('name',)}
-    inlines = [ProdcutImageModelAdmin, ProductSizeModelAdmin]
+    inlines = [ProdcutImageModelAdmin, ProductSizeModelAdmin, ProdcutColorModelAdmin]
+
+
 
 
 

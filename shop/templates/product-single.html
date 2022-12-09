@@ -7,12 +7,12 @@
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="../">Home</a></li>
 					<li><a href="./">Shop</a></li>
 					<li class="active">Single Product</li>
 				</ol>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6">	
 				<ol class="product-pagination text-right">
 					<li><a href="blog-left-sidebar.html"><i class="tf-ion-ios-arrow-left"></i> Next </a></li>
 					<li><a href="blog-left-sidebar.html">Preview <i class="tf-ion-ios-arrow-right"></i></a></li>
@@ -52,11 +52,11 @@
 								<img src="{{ product.product_front_image.url }}" alt="{{ product.product_front_image }"
 							</li>
 							{% for image in product.images.all %}
-							<li data-target='#carousel-custom' data-slide-to='1'>
+							<li data-target='#carousel-custom' data-slide-to='{{ forloop.counter }}'>
 								<img src='{{ image.image.url }}' alt='{{ image.image }}'/>
 							</li>
 							{% endfor %}
-						
+				
 						</ol>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 						<ul>
 							{% for color in product.color.all  %}
 							<li>
-								<a href="#" class="swatch" style="background-color: {{ color.code }}"></a>
+								<a href="#" class="swatch" role='button' style="background-color: {{ color.code }}"></a>
 							</li>
 							{% endfor %}
 						</ul>

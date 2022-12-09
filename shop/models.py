@@ -5,7 +5,7 @@ from colorfield.fields import ColorField
 
     
 class Category(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200,
                             unique=True)
     image = models.ImageField(upload_to='category/')

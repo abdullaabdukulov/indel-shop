@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls', namespace='shop')),
     path('tinymce/',include('tinymce.urls')),
+    path('account/', include('account.urls', namespace='account')),
     
 ]
 handler404 = 'shop.views.error_404_view'

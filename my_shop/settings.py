@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # apps
     'shop.apps.ShopConfig',
+    'account.apps.AccountConfig',
     'colorfield',
     'tinymce',
 ]

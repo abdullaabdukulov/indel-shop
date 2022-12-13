@@ -281,15 +281,15 @@
 						</ul>
 					</li><!-- / Blog -->
 
-					<!-- Shop -->
+					<!	-- Shop -->
 					<li class="dropdown dropdown-slide">
 						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Elements <span
+							role="button" aria-haspopup="true" aria-expanded="false">Accounts <span
 								class="tf-ion-ios-arrow-down"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="typography.html">Typography</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="alerts.html">Alerts</a></li>
+							<li><a href="{% url 'account:login' %}"">Login</a></li>
+							<li><a href=""">Register</a></li>
+							<li><a href="">Forget Password</a></li>
 						</ul>
 					</li><!-- / Blog -->
 				</ul><!-- / .nav .navbar-nav -->
@@ -386,6 +386,8 @@
     
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
+{% comment %} for icon {% endcomment %}
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> 
 
   </body>
   </html>

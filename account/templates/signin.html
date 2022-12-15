@@ -13,19 +13,21 @@
             <img src="{% static 'images/logo.png' %}" alt="image">
           </a>
           <h2 class="text-center">Welcome Back</h2>
-          <form class="text-left clearfix" action="" method='post'>
+          <form class="text-left clearfix" action="{% url 'account:login' %}" method='post'>
             {% csrf_token %}
-           <div class="form-group">
+            <div class="form-group">
             {{ form.username }}
             </div>
             <div class="form-group">
               {{ form.password }}
             </div>
+            <input type="hidden" name="next" value="{{ next }}" />
+
             <div class="text-center">
               <button type="submit" class="btn btn-main text-center" >Login</button>
             </div>
           </form>
-          <p class="mt-20">New in this site ?<a href="signin.html"> Create New Account</a></p>
+          <p class="mt-20">New in this site ?<a href="{% url 'account:register' %}"> Create New Account</a></p>
           {% comment %} <p><a href="{% url 'account:forgetpassword' %}"> Forgot your password?</a></p> {% endcomment %}
         </div>
       </div>

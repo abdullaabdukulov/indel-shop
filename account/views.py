@@ -1,28 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
+from django.template import RequestContext
 
-# def user_login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             if user.is_active:
-#                 login(request, user)
-#                 return redirect('shop:home')
-    
-    
-#     return render(request, 'signin.html')
-
-
-# def user_logout(request):
-#     logout(request)
-#     return redirect('shop:home')
-    
-# def user_register(request):
-#     pass
 
 def user_login(request):
     if request.method == 'POST':
@@ -38,10 +18,24 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     return redirect('shop:home')
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid credentials')
     else:
         form = LoginForm()
     return render(request, 'signin.html', {'form': form})
+
+
+def user_register(request):
+    if request.method == 'POST':
+        user_form = RegisterForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(
+                user_form.cleaned_data['password']
+            )
+            new_user.save()
+            return redirect('account:login')
+
+    else:
+        user_form = RegisterForm()
+
+    return render(request, 'signup.html', {'user_form': user_form})
+        

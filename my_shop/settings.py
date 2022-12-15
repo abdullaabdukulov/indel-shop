@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'colorfield',
     'tinymce',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +161,9 @@ PARLER_LANGUAGES = {
         'hide_untranslated': False,
     }
 }
+
+
+
+# LOGIN_REDIRECT_URL = 'dashboard'
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'

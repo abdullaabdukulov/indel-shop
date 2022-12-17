@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, ProductsImage, ProductSizes, Product, ProductColor
+from .models import Category, ProductsImage, ProductSizes, Product, ProductColor, Reviews
 from django.db import models
 from tinymce.widgets import TinyMCE
 
@@ -32,8 +32,11 @@ class ProductAdmin(admin.ModelAdmin):
    }
     prepopulated_fields = {'slug': ('name',)}
     inlines = [ProdcutImageModelAdmin, ProductSizeModelAdmin, ProdcutColorModelAdmin]
-
-
+    
+@admin.register(Reviews)
+class ReviewsAdmin(admin.ModelAdmin):
+    list_display = ['product', 'user', 'rating']
+    list_filter = ['created']
 
 
 

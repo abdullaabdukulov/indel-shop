@@ -32,6 +32,7 @@ def user_register(request):
                 user_form.cleaned_data['password']
             )
             new_user.save()
+            
             return redirect('account:login')
 
     else:

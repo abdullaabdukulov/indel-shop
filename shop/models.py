@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from colorfield.fields import ColorField
+from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
     
@@ -87,5 +89,20 @@ class ProductColor(models.Model):
         verbose_name = 'product color'
         verbose_name_plural = 'product colors'
     
+    def __str__(self):
+        return self.product.name
+
+class Reviews(models.Model):
+    content = models.TextField(max_length=400)
+    rating = models.FloatField(default=5, validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'product review'
+        verbose_name_plural = 'product reviews'
+
     def __str__(self):
         return self.product.name

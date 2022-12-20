@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Category, Product, ProductSizes, ProductsImage
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Category, Product, ProductSizes, ProductsImage, Reviews
+from .forms import ReviewsForm
 
 def error_404_view(request, exception):
     return render(request, 'shop/404.html')
@@ -28,5 +29,25 @@ def product_list(request):
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    ctx = {'product': product}
+    reviews = Reviews.objects.filter(product=id).order_by('-created').values()
+    ctx = {'product': product, 'reviews': reviews}
+
     return render(request, 'product-single.html', ctx)
+
+def add_review(request, id):
+    product = get_object_or_404(Product, id=id, available=True)
+    if request.method == 'POST':
+        form = ReviewsForm(request.POST or None)
+        if form.is_valid():
+            data = Reviews(
+                comment = request.POST.get('comment'),
+                rating = request.POST.get('rating'),
+                product = product
+            )
+            data.save()
+            return redirect('shop:product_detail', product.id, product.slug)
+    return redirect('shop:product_detail', product.id, product.slug)
+            
+
+
+        

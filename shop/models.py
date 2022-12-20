@@ -93,12 +93,11 @@ class ProductColor(models.Model):
         return self.product.name
 
 class Reviews(models.Model):
-    content = models.TextField(max_length=400)
+    comment = models.TextField(max_length=400)
     rating = models.FloatField(default=5, validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'product review'

@@ -11,7 +11,6 @@ class Profile(models.Model):
     country = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField()
     phone_number = PhoneNumberField(blank=True, null=True)
-    date_of_birth = models.DateField(default=timezone.now(), blank=True, null=True)
     image = models.ImageField(upload_to='orders/', blank=True, null=True)
 
     def __str__(self):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Category, ProductsImage, ProductSizes, Product, ProductColor, Reviews
 from django.db import models
-from tinymce.widgets import TinyMCE
+# from tinymce.widgets import TinyMCE
 
 
 class ProductSizeModelAdmin(admin.TabularInline):
@@ -27,9 +27,9 @@ class ProductAdmin(admin.ModelAdmin):
                        'available', 'created', 'updated']
     list_filter = ['available', 'created', 'updated']
     list_editable = ['price', 'available']
-    formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()}
-   }
+#     formfield_overrides = {
+#         models.TextField: {'widget': TinyMCE()}
+#    }
     prepopulated_fields = {'slug': ('name',)}
     inlines = [ProdcutImageModelAdmin, ProductSizeModelAdmin, ProdcutColorModelAdmin]
     

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Product, ProductSizes, ProductsImage, Reviews
+from .models import Category, Product, Reviews
 from .forms import ReviewsForm
 
 def error_404_view(request, exception):
@@ -33,6 +33,7 @@ def product_detail(request, id, slug):
     ctx = {'product': product, 'reviews': reviews}
 
     return render(request, 'product-single.html', ctx)
+
 
 def add_review(request, id):
     product = get_object_or_404(Product, id=id, available=True)

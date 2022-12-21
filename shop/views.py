@@ -3,7 +3,7 @@ from .models import Category, Product, Reviews
 from .forms import ReviewsForm
 
 def error_404_view(request, exception):
-    return render(request, 'shop/404.html')
+    return render(request, 'erorrs/404.html')
 
 def shopmainview(request, category_slug=None):
     category, products = None, None

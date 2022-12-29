@@ -19,12 +19,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    # Django admin
     path('admin/', admin.site.urls),
+
+    # Local apps
     path('', include('shop.urls', namespace='shop')),
+
+    # Tinymce 
     path('tinymce/',include('tinymce.urls')),
+
+    # User management
     path('account/', include('account.urls', namespace='account')),
     
 ]
-handler404 = 'shop.views.error_404_view'
+handler404 = 'account.views.error_404_view'
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

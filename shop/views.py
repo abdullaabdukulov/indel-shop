@@ -2,12 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Reviews
 from .forms import ReviewsForm
 
-def error_404_view(request, exception):
-    return render(request, 'erorrs/404.html')
-
 def shopmainview(request, category_slug=None):
     category, products = None, None
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('name')
     if category_slug:
         category  = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category, available=True)
@@ -22,7 +19,7 @@ def shopmainview(request, category_slug=None):
     return render(request, 'index.html', ctx)
 
 def product_list(request):
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).order_by('-created')
     ctx = {'products': products}
     return render(request, 'shop.html', ctx)
 

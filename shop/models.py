@@ -34,7 +34,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     product_front_image = models.ImageField(upload_to='products/%Y/%m/%d')
-    description = models.TextField(max_length=400)
+    description = models.TextField(max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     statement = models.TextField()
     available = models.BooleanField(default=True)    

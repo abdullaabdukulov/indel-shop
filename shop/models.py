@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-    
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200,
@@ -37,7 +36,7 @@ class Product(models.Model):
     description = models.TextField(max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     statement = models.TextField()
-    available = models.BooleanField(default=True)    
+    available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -53,20 +52,21 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-           return reverse('shop:product_detail',
-                          args=[self.id, self.slug])
+        return reverse('shop:product_detail',
+                       args=[self.id, self.slug])
 
 
 class ProductsImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='images', verbose_name='product')
     image = models.ImageField(upload_to='products/%Y/%m/%d/product_images/', null=True, blank=True)
-    
+
     class Meta:
         verbose_name = 'product image'
         verbose_name_plural = 'product images'
-    
+
     def __str__(self):
         return self.product.name
+
 
 class ProductSizes(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='sizes')
@@ -79,18 +79,19 @@ class ProductSizes(models.Model):
     def __str__(self):
         return self.product.name
 
+
 class ProductColor(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='color', blank=True, null=True)
     color = models.CharField(max_length=10)
     code = ColorField(default='#FF0000')
-    
 
     class Meta:
         verbose_name = 'product color'
         verbose_name_plural = 'product colors'
-    
+
     def __str__(self):
         return self.product.name
+
 
 class Reviews(models.Model):
     comment = models.TextField(max_length=400)

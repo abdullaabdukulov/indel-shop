@@ -23,15 +23,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Local apps
-    path('', include('shop.urls', namespace='shop')),
+    path('', include('apps.shop.urls', namespace='shop')),
 
     # Tinymce 
-    path('tinymce/',include('tinymce.urls')),
+    path('tinymce/', include('tinymce.urls')),
 
     # User management
-    path('account/', include('account.urls', namespace='account')),
-    
+    # path('account/', include('apps.account.urls', namespace='account')),
+
 ]
-handler404 = 'account.views.error_404_view'
+# handler404 = 'account.views.error_404_view'
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

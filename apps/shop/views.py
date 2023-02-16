@@ -2,21 +2,22 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Reviews
 from .forms import ReviewsForm
 
+
 def shopmainview(request, category_slug=None):
     category, products = None, None
     categories = Category.objects.all().order_by('name')
     if category_slug:
-        category  = get_object_or_404(Category, slug=category_slug)
+        category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category, available=True)
-        ctx =  {
+        ctx = {
             'category': category,
             'products': products
         }
         return render(request, 'shop.html', ctx)
     ctx = {'categories': categories}
-        
-   
+
     return render(request, 'index.html', ctx)
+
 
 def product_list(request):
     products = Product.objects.filter(available=True).order_by('-created')
@@ -38,14 +39,10 @@ def add_review(request, id):
         form = ReviewsForm(request.POST or None)
         if form.is_valid():
             data = Reviews(
-                comment = request.POST.get('comment'),
-                rating = request.POST.get('rating'),
-                product = product
+                comment=request.POST.get('comment'),
+                rating=request.POST.get('rating'),
+                product=product
             )
             data.save()
             return redirect('shop:product_detail', product.id, product.slug)
     return redirect('shop:product_detail', product.id, product.slug)
-            
-
-
-        

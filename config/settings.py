@@ -163,4 +163,4 @@ PARLER_LANGUAGES = {
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'  # new
 
-AUTH_USER_MODEL = 'account.MyUser'
+AUTH_USER_MODEL = 'account.CustomUser'

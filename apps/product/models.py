@@ -16,7 +16,7 @@ class Promotion(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
     discount_rate = models.FloatField()
-    start_date = models.DateTimeField(default=timezone.now())
+    start_date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,8 +26,8 @@ class Promotion(models.Model):
 
 
 class PromotionCategory(models.Model):
-    category = models.ForeignKey(Category, related_name='configurations', on_delete=models.CASCADE)
-    promotion = models.ForeignKey(Promotion, related_name='product_opinions', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='promotion_categories', on_delete=models.CASCADE)
+    promotion = models.ForeignKey(Promotion, related_name='promotion_categories', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.category.name
@@ -46,7 +46,7 @@ class Product(models.Model):
 
 
 class ProductItem(models.Model):
-    product = models.ForeignKey(Product, related_name='product_item', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='product_items', on_delete=models.CASCADE)
     sku = models.CharField(max_length=250)
     qty_in_stock = models.IntegerField()
     price = models.IntegerField()
@@ -58,7 +58,7 @@ class ProductItem(models.Model):
 
 
 class Variation(models.Model):
-    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='category_variations', on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
 
     def __str__(self):
@@ -74,7 +74,7 @@ class VariationOpinion(models.Model):
 
 
 class ProductConfigurations(models.Model):
-    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE, related_name='product_items')
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE, related_name='product_configurations')
     product_opinion = models.ForeignKey(VariationOpinion, on_delete=models.CASCADE, related_name='product_opinions')
 
     def __str__(self):

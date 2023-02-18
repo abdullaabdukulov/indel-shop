@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # Local
     # 'apps.shop',
     'apps.product',
-    # 'apps.account',
+    'apps.account',
     'colorfield',
     'tinymce',
     'phonenumber_field',
@@ -162,3 +162,5 @@ PARLER_LANGUAGES = {
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'  # new
+
+AUTH_USER_MODEL = 'account.MyUser'

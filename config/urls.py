@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Local apps
-    path('', include('apps.shop.urls', namespace='shop')),
+    # path('', include('apps.shop.urls', namespace='shop')),
 
     # Tinymce 
     path('tinymce/', include('tinymce.urls')),

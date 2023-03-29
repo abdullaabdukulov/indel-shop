@@ -29,7 +29,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
 
     # User management
-    # path('account/', include('apps.account.urls', namespace='account')),
+    path('account/', include('apps.account.urls', namespace='accounts')),
 
 ]
 # handler404 = 'account.views.error_404_view'

@@ -5,6 +5,10 @@ from .models import (
 )
 
 
+class VariationOpinionInline(admin.TabularInline):
+    model = VariationOpinion
+
+
 class VariationInline(admin.StackedInline):
     model = ProductConfigurations
     raw_id_fields = ['product_item']
@@ -38,6 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
 class PromotionAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'discount_rate', 'start_date', 'end_date', 'created_at']
     list_filter = ['start_date', 'end_date', 'discount_rate']
+    search_fields = ('name', 'description',)
 
 
 @admin.register(PromotionCategory)
@@ -54,6 +59,7 @@ class ProductItemAdmin(admin.ModelAdmin):
 @admin.register(Variation)
 class VariationAdmin(admin.ModelAdmin):
     list_display = ['category', 'name']
+    inlines = [VariationOpinionInline, ]
 
 
 @admin.register(VariationOpinion)

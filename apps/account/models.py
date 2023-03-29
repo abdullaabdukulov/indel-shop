@@ -39,7 +39,37 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['email_address']
+    # REQUIRED_FIELDS = ['email_address']
 
     def __str__(self):
         return self.phone_number
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+
+class Address(models.Model):
+    unit_number = models.CharField(max_length=50, blank=True)
+    street_number = models.CharField(max_length=50)
+    address_line_1 = models.CharField(max_length=250)
+    address_line_2 = models.CharField(max_length=250, blank=True)
+    city = models.CharField(max_length=250)
+    region = models.CharField(max_length=250, blank=True)
+    postal_code = models.CharField(max_length=50)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.street_number} {self.address_line_1}, {self.city}, {self.country.name}"
+
+
+class CustomAddress(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    is_default = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.email_address} - {self.address}"
